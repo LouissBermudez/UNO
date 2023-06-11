@@ -1,0 +1,48 @@
+body{
+    background-image: url("./images/fondo.jpg") ;
+    background-repeat: no-repeat ;
+    object-fit: cover;
+}
+
+
+.mazoJugadorUno{
+    display: flex;
+    flex-direction: row;
+    height: 95vh;
+    align-items: end;
+    justify-content: center;
+
+}
+
+.mazoJugadorUno .cards:nth-child(2){
+    transform: translateX(-30px);
+}
+.mazoJugadorUno .cards:nth-child(3){
+    transform: translateX(-60px);
+}
+.mazoJugadorUno .cards:nth-child(4){
+    transform: translateX(-90px);
+}
+.mazoJugadorUno .cards:nth-child(5){
+    transform: translateX(-120px);
+}
+.mazoJugadorUno .cards:nth-child(6){
+    transform: translateX(-150px);
+}
+.mazoJugadorUno .cards:nth-child(7){
+    transform: translateX(-180px);
+}
+
+
+
+img{
+    border-radius: 18px;
+    max-width: 150px;
+}
+
+.cards{
+    border: solid;
+    border-radius: 19px;
+    max-height: 150px;
+}
+
