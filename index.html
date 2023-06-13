@@ -6,8 +6,31 @@
     <link rel="stylesheet" href="styles.css" >
 </head>
 <body>
-<div class="mazoJugadorUno" id="mazoJugador"></div>
+
+<div id="pedirCarta" class="pedirCarta"><button>Pedir Carta</button></div>
+<div class="mazoJugadorDos" id="mazoJugadorDos"> </div>
+
+
+<div id="cartaComienzo"></div>
+<div class="mazoMesa" id="mazoMesa">
+<h1>Place Card</h1></div>
+
+<div class="mazoJugadorUno" id="mazoJugador"> </div>
+<div id="cambioColor" class="cambioColor">
+    <div><h1>Escoge un color</h1></div>
+    <div class="colores">
+        <button id="azul" class="azul"></button>
+        <button id="rojo" class="rojo"></button>
+        <button id="verde" class="verde"></button>
+        <button id="amarillo" class="amarillo"></button>
+    </div>
+
+</div>
+
+
 </body>
 
 <script type="module"  src="./scripts/main.js"></script>
+<!-- jsDelivr :: Sortable :: Latest (https://www.jsdelivr.com/package/npm/sortablejs) -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </html>

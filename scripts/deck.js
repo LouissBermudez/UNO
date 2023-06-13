@@ -3,9 +3,9 @@ import Card from "./card.js";
 export default class Deck {
     constructor() {
         this.generalDeck = [];
-        this.playerUnoDeck = [];
-        this.playerDosDeck = [];
-
+        this.mesaDeck = [0];
+        this.playerUnoDeck = [0];
+        this.playerDosDeck = [0];
 
     }
 
@@ -16,9 +16,36 @@ export default class Deck {
         this.crearCartasNormales();
         this.crearCartasEspeciales();
         this.shuffle();
+        this.cartaNuevoJuego();
         for (let i = 1; i <= 7; i++){
-            this.mostrarCartas();
+            this.mostrarCartasP1();
+            this.mostrarCartasP2()
         }
+
+    }
+
+
+
+    cartaNuevoJuego(){
+        const card = this.generalDeck.pop();
+        this.mesaDeck.push(card)
+        console.log(this.mesaDeck)
+        if (card.numero != null) {
+            const contenedorImagen = document.createElement('div')
+            const imagen = document.createElement('img')
+            const contenedor = document.getElementById("cartaComienzo")
+            imagen.src = card.imagen;
+            contenedorImagen.className = 'cartaComienzo';
+            contenedorImagen.dataset.tipo = `${card.tipo}`
+            contenedor.appendChild(contenedorImagen);
+            contenedorImagen.appendChild(imagen);
+            contenedorImagen.id = `${card.numero}${card.color}`;
+            contenedorImagen.dataset.color = card.color;
+            contenedorImagen.dataset.numero = card.numero;
+        }else{
+            document.location.reload();
+        }
+
 
     }
     crearCartasNormales() {
@@ -37,27 +64,56 @@ export default class Deck {
 
 
     }
-    mostrarCartas(){
+    mostrarCartasP1(){
         const card = this.generalDeck.pop();
         const contenedorImagenes = document.createElement('div');
         const imagen = document.createElement('img');
         const contenedor = document.getElementById('mazoJugador');
         imagen.src = card.imagen;
         contenedorImagenes.className = 'cards';
+        contenedorImagenes.draggable = true;
         contenedorImagenes.dataset.tipo = `${card.tipo}`;
-        contenedorImagenes.id = `${card.numero}${card.color}`;
+        contenedorImagenes.dataset.color = card.color;
+        contenedorImagenes.dataset.numero = card.numero;
+
+        if (card.numero != null) {
+            contenedorImagenes.id = `${card.numero}${card.color}`;
+        }else if (card.color == null){
+            contenedorImagenes.id = 'cambioolor';
+        }else{
+            contenedorImagenes.id = `especial${card.color}`
+        }
+
         contenedor.appendChild(contenedorImagenes);
         contenedorImagenes.appendChild(imagen);
         this.playerUnoDeck.push(card);
+    }mostrarCartasP2(){
+        const card = this.generalDeck.pop();
+        const contenedorImagenes = document.createElement('div');
+        const imagen = document.createElement('img');
+        const contenedor = document.getElementById('mazoJugadorDos');
+        imagen.src = card.imagen;
+        contenedorImagenes.className = 'cards';
+        contenedorImagenes.draggable = true;
+        contenedorImagenes.dataset.tipo = `${card.tipo}`;
+        contenedorImagenes.dataset.color = card.color;
+        contenedorImagenes.dataset.numero = card.numero;
+
+        if (card.numero != null) {
+            contenedorImagenes.id = `${card.numero}${card.color}`;
+        }else if (card.color == null){
+            contenedorImagenes.id = 'cambioColor';
+        }else{
+            contenedorImagenes.id = `especial${card.color}`
+        }
+
+        contenedor.appendChild(contenedorImagenes);
+        contenedorImagenes.appendChild(imagen);
+        this.playerDosDeck.push(card);
     }
     crearCartasEspeciales (){
         for (let i = 0; i < Card.color.length; i++){
                 const color = Card.color[i];
-                // Cartas Reversa
-                const typeReverso = "Especial_Reverso";
-                const imagenReverso = `./images/reverso${color}.png`;
-                const cartaEspecialReverso = new Card(color, null, imagenReverso, typeReverso);
-
 
                 // Cartas +2
                 const typeMasDos = "Especial_MasDos";
@@ -71,7 +127,7 @@ export default class Deck {
                 const cartaEspecialCambioColor = new Card(null, null , imagenCambioColor, typeCambioColor)
 
                 // Push de todas las cartas al array
-                this.generalDeck.push(cartaEspecialReverso, cartaEspecialMasDos, cartaEspecialCambioColor);
+                this.generalDeck.push(cartaEspecialMasDos, cartaEspecialCambioColor);
 
         }
     }

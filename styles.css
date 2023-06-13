@@ -1,48 +1,199 @@
 body{
+    display: flex;
     background-image: url("./images/fondo.jpg") ;
     background-repeat: no-repeat ;
-    object-fit: cover;
+    background-size: cover;
+    height: 95vh;
+    width: 95vw;
 }
+
 
 
 .mazoJugadorUno{
+    align-self: end;
     display: flex;
     flex-direction: row;
-    height: 95vh;
-    align-items: end;
-    justify-content: center;
 
+
+
+}.mazoJugadorDos{
+    align-self: start;
+    display: flex;
+    flex-direction: row;
+
+ }
+ .pedirCarta {
+     position: absolute;
+     left: 60%;
+     top: 50%;
+ }
+
+ .pedirCarta button{
+     background-color: rgba(252, 192, 0, 0.57); /* Rojo */
+     color: white;
+     height: 50px;
+     font-size: 20px;
+     font-family: "Comic Sans MS", serif;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.4);
+     transition: 0.5s ease-in-out;
+ }
+ .pedirCarta button:hover{
+     transform: scale(1.2);
+ }
+ #cartaComienzo{
+     position: absolute;
+     top: 46%;
+     left: 35%;
+ }
+
+
+.mazoMesa {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    height: 150px;
+    margin: 5px;
+    width: 99px;
+    border: solid;
+    border-radius: 20px;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 1);
 }
 
-.mazoJugadorUno .cards:nth-child(2){
-    transform: translateX(-30px);
+h1 {
+    text-align: center;
+    font-family: "Comic Sans MS", serif;
 }
-.mazoJugadorUno .cards:nth-child(3){
-    transform: translateX(-60px);
+
+.cambioColor{
+    position: absolute;
+    top: 45%;
+    left: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 200px;
+    height: 50px;
+    visibility: hidden;
 }
-.mazoJugadorUno .cards:nth-child(4){
-    transform: translateX(-90px);
+
+.cambioColor .colores{
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: row;
 }
-.mazoJugadorUno .cards:nth-child(5){
-    transform: translateX(-120px);
+
+.azul{
+    background-color: blue;
+    align-self: center;
+    border: solid;
+    border-radius: 10px;
+    height: 50px;
+    width: 20px;
+    transition: 0.5s ease-in-out;
 }
-.mazoJugadorUno .cards:nth-child(6){
-    transform: translateX(-150px);
+
+.rojo{
+    background-color: #d70303;
+    align-self: center;
+    border-radius: 10px;
+    border: solid;
+    height: 50px;
+    width: 20px;
+    transition: 0.5s ease-in-out;
+
+}.verde{
+    background-color: green;
+    border-radius: 10px;
+    align-self: center;
+    border: solid;
+    height: 50px;
+    width: 20px;
+     transition: 0.5s ease-in-out;
+
+ }.amarillo{
+    background-color: yellow;
+    border-radius: 10px;
+    align-self: center;
+    border: solid;
+    height: 50px;
+    width: 20px;
+    transition: 0.5s ease-in-out;
+
+   }
+
+.azul:hover{
+    transform: scale(1.2);
+    cursor: pointer;
 }
-.mazoJugadorUno .cards:nth-child(7){
-    transform: translateX(-180px);
+.rojo:hover{
+    transform: scale(1.2);
+    cursor: pointer;
 }
+.verde:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.amarillo:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
 
 
 
 img{
     border-radius: 18px;
     max-width: 150px;
+    transition: 0.5s ease-in-out;
 }
 
 .cards{
-    border: solid;
+
     border-radius: 19px;
     max-height: 150px;
+    max-width: 101px;
+
+}
+
+.mazoMesa .rotate-left{
+    transform: rotate(-20deg);
+
+}
+.mazoMesa .rotate-right{
+    transform: rotate(20deg);
+}
+
+.mazoMesa .cards{
+    position: absolute;
+    top: 1%;
+    right: 200%;
+}
+
+.mazoJugadorUno img:hover{
+    transform: translateY(-30px);
+    
+}
+.mazoJugadorDos img:hover{
+    transform: translateY(30px);
+
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 0, 255, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+    }
+}
+
+#mazoMesa.highlight {
+    animation: glow 1s infinite;
 }
 

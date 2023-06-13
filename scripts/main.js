@@ -1,8 +1,18 @@
-import Deck from "./deck.js";
+import Deck from "./game.js";
+import Game from "./game.js";
+
+
+const juego = new Game();
+
+juego.startGame()
 
 
 
 
 
-const deck = new Deck();
-deck.crearMazo();
+
+
+
+
+
+
