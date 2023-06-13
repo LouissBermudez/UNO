@@ -3,7 +3,9 @@ import Deck from "./deck.js";
 import Player from "./player.js";
 
 export default class Game{
-
+    /**
+     *@constructor
+     */
     constructor() {
     this.deck = new Deck();
     this.turno = 0;
@@ -11,6 +13,10 @@ export default class Game{
     this.colorChange = document.getElementById("cambioColor")
     }
 
+    /** Función que empieza el juego
+     *
+     * @function
+     */
     startGame() {
         this.deck.crearMazo();
         this.deck.shuffle();
@@ -20,7 +26,10 @@ export default class Game{
     }
 
 
-
+    /**
+     * Función que se encarga de todo lo relacionado con el Drag And Drop, utilizando la librería Sortable JS
+     * @function
+     */
     sortable(){
         const mazoJugadorUno = document.getElementById("mazoJugador");
         const mazoJugadorDos = document.getElementById("mazoJugadorDos");
@@ -82,12 +91,13 @@ export default class Game{
                 const indice = evt.oldIndex + 1;
                 const cartaArray = this.deck.playerDosDeck.filter((value) => indice);
                 const cartaDragArray = cartaArray[indice];
+                console.log(cartaDragArray)
 
                 this.verificarCarta(cartaDragArray, arrastrarMazoMesa);
 
                 this.botonColor(cartaDragArray)
 
-                console.log(this.currentPlayer)
+
                 mazoMesa.classList.add('highlight');
             },
             onRemove: (evt) =>{
@@ -122,8 +132,12 @@ export default class Game{
     }
 
 
-
-
+    /**
+     * Función que se encarga de verificar el número, color y tipo de las cartas arrastradas.
+     * @param {object}cartaDragArray
+     * @param {htmlelement}arrastrarMazoMesa
+     * @function
+     */
 
     verificarCarta(cartaDragArray, arrastrarMazoMesa) {
         const carta = this.deck.mesaDeck[this.deck.mesaDeck.length - 1];
@@ -149,7 +163,10 @@ export default class Game{
     }
 
 
-
+    /**
+     * Función que se encarga de verificar el ganador de la partida.
+     * @function
+     */
     winnerCheck(){
         if (this.deck.playerUnoDeck.length === 0){
             alert("Player Uno Ha ganado")
@@ -158,6 +175,11 @@ export default class Game{
         }
     }
 
+    /**
+     * Función que se encarga de añadir las cartas al jugador contrario al poner un +2 en la mesa.
+     * @param {object}cartaDragArray
+     * @function
+     */
     verificarMasDos(cartaDragArray){
         if (cartaDragArray.tipo === "Especial_MasDos"){
 
@@ -173,6 +195,11 @@ export default class Game{
         }
     }
 
+    /**
+     * Función que se encarga de añadir las cuatro cartas al mazo del contrincante al poner un +4 en la mesa
+     * @param {object}cartaDrag
+     * @function
+     */
     verificarMasCuatro(cartaDrag){
         this.colorChange.style.visibility = "visible";
         if(cartaDrag.tipo === "Especial_MasCuatro"){
@@ -188,6 +215,11 @@ export default class Game{
             }
         }
     }
+
+    /**
+     * Función que se encarga de la funcionalidad de la elección de colores al poner una carta de tipo: Cambio de Color o +4
+     * @param{object} cartaDrag
+     */
     botonColor(cartaDrag){
         const azul = document.getElementById("azul")
         const rojo = document.getElementById("rojo")
@@ -216,6 +248,10 @@ export default class Game{
     }
 
 
+    /**
+     * Botón para dar una carta a cada jugador dependiendo del turno
+     * @function
+     */
     botonDarCarta(){
         const boton = document.getElementById("pedirCarta")
         boton.addEventListener("click" ,() => {
@@ -238,6 +274,14 @@ export default class Game{
             arrastrarMazoMesa.option('disabled', true);
         }
     }
+
+
+    /**
+     * Función que se encarga de cambiar el turno del jugador.
+     * @param {htmlelement}mazoJugadorUno
+     * @param {htmlelement}mazoJugadorDos
+     * @function
+     */
     cambiarTurno(mazoJugadorUno, mazoJugadorDos) {
         if (this.turno === 0) {
             this.currentPlayer = new Player('JUGADOR 1');

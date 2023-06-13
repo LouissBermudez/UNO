@@ -1,17 +1,21 @@
 import Card from "./card.js";
 
 export default class Deck {
+
+    /** Se crean los arrays de los mazos principales.
+     * @constructor
+     */
     constructor() {
         this.generalDeck = [];
         this.mesaDeck = [0];
         this.playerUnoDeck = [0];
         this.playerDosDeck = [0];
-
     }
 
 
-
-
+    /** Esta funcion se encarga de crear el mazo de cada jugador, llamando a las demas funciones.
+     * @function
+     */
     crearMazo(){
         this.crearCartasNormales();
         this.crearCartasEspeciales();
@@ -25,7 +29,9 @@ export default class Deck {
     }
 
 
-
+    /**Función que añade la carta inicial a la mesa
+     * @function
+     */
     cartaNuevoJuego(){
         const card = this.generalDeck.pop();
         this.mesaDeck.push(card)
@@ -48,6 +54,10 @@ export default class Deck {
 
 
     }
+
+    /** Función que crea las cartas de tipo "Normal", es decir las cartas con número y color
+     * @function
+     */
     crearCartasNormales() {
         for (let i = 0; i < Card.color.length ; i++){
             for (let j = 0; j < 9; j++) {
@@ -64,6 +74,10 @@ export default class Deck {
 
 
     }
+
+    /** Función que se encarga de mostrar las cartas del mazo del jugador 1 en pantalla.
+     * @function
+     */
     mostrarCartasP1(){
         const card = this.generalDeck.pop();
         const contenedorImagenes = document.createElement('div');
@@ -87,6 +101,10 @@ export default class Deck {
         contenedor.appendChild(contenedorImagenes);
         contenedorImagenes.appendChild(imagen);
         this.playerUnoDeck.push(card);
+
+        /** Función que muestra por pantalla las cartas del mazo del jugador 2.
+         * @function
+          */
     }mostrarCartasP2(){
         const card = this.generalDeck.pop();
         const contenedorImagenes = document.createElement('div');
@@ -111,6 +129,11 @@ export default class Deck {
         contenedorImagenes.appendChild(imagen);
         this.playerDosDeck.push(card);
     }
+
+
+    /** Función que crea las cartas de tipo "Especial", es deci las cartas: Reverso, +2 y +4.
+     * @function
+     */
     crearCartasEspeciales (){
         for (let i = 0; i < Card.color.length; i++){
                 const color = Card.color[i];
@@ -140,7 +163,9 @@ export default class Deck {
         }
     }
 
-
+    /** Función que barajea las cartas del mazo.
+     * @function
+     */
     shuffle(){
         for (let i = this.generalDeck.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
