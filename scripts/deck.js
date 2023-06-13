@@ -119,15 +119,23 @@ export default class Deck {
                 const typeMasDos = "Especial_MasDos";
                 const imagenMasDos = `./images/masDos${color}.png`;
                 const cartaEspecialMasDos = new Card(color,null, imagenMasDos, typeMasDos);
-
+                // Cartas +4
+                const typeMasCuatro = "Especial_MasCuatro";
+                const imagenMasCuatro = './images/masCuatro.png'
+                const cartaEspecialMasCuatro = new Card(null, null, imagenMasCuatro, typeMasCuatro);
 
                 // Cartas Cambio de Color
                 const typeCambioColor = "Especial_CambioColor";
                 const imagenCambioColor = './images/cambioColor.png';
                 const cartaEspecialCambioColor = new Card(null, null , imagenCambioColor, typeCambioColor)
 
+
+
+                // Carta saltar turno
+                const typeSaltarTurno = "Especial_SaltarTurno"
+
                 // Push de todas las cartas al array
-                this.generalDeck.push(cartaEspecialMasDos, cartaEspecialCambioColor);
+                this.generalDeck.push(cartaEspecialMasDos, cartaEspecialCambioColor, cartaEspecialMasCuatro);
 
         }
     }

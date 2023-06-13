@@ -41,7 +41,6 @@ export default class Game{
                 const cartaArray = this.deck.playerUnoDeck.filter((value) => indice);
                 const cartaDragArray = cartaArray[indice];
                 this.verificarCarta(cartaDragArray, arrastrarMazoMesa);
-                this.verificarMasDos(cartaDragArray);
                 this.botonColor(cartaDragArray)
                 console.log(indice)
 
@@ -56,6 +55,8 @@ export default class Game{
                 const eliminarCartaDrag = cartaDrag[0]
                 this.deck.mesaDeck.push(eliminarCartaDrag);
                 console.log(this.deck.mesaDeck)
+                this.verificarMasDos(eliminarCartaDrag);
+                this.verificarMasCuatro(eliminarCartaDrag);
                 this.turno = 1;
                 mazoJugadorUno.style.visibility = "hidden"
                 this.cambiarTurno(mazoJugadorUno, mazoJugadorDos)
@@ -82,9 +83,8 @@ export default class Game{
                 const cartaArray = this.deck.playerDosDeck.filter((value) => indice);
                 const cartaDragArray = cartaArray[indice];
 
-
                 this.verificarCarta(cartaDragArray, arrastrarMazoMesa);
-                this.verificarMasDos(cartaDragArray);
+
                 this.botonColor(cartaDragArray)
 
                 console.log(this.currentPlayer)
@@ -97,6 +97,8 @@ export default class Game{
                 this.deck.mesaDeck.push(eliminarCartaDrag);
                 this.turno = 0
                 mazoJugadorDos.style.visibility = "hidden";
+                this.verificarMasDos(eliminarCartaDrag);
+                this.verificarMasCuatro(eliminarCartaDrag);
                 this.cambiarTurno(mazoJugadorUno, mazoJugadorDos);
                 this.cambiarTurno(mazoJugadorUno, mazoJugadorDos);
             },
@@ -137,19 +139,21 @@ export default class Game{
 
 
         if(cartaDragArray.tipo === "Especial_CambioColor" ) {
-
             arrastrarMazoMesa.option('disabled', false)
             this.colorChange.style.visibility = "visible";
+        }
 
+        if (cartaDragArray.tipo === "Especial_MasCuatro"){
+            arrastrarMazoMesa.option('disabled', false);
         }
     }
 
 
 
     winnerCheck(){
-        if (this.deck.playerUnoDeck.length === 1){
+        if (this.deck.playerUnoDeck.length === 0){
             alert("Player Uno Ha ganado")
-        }else if (this.deck.playerDosDeck.length === 1){
+        }else if (this.deck.playerDosDeck.length === 0){
             alert("Player Dos Ha ganado")
         }
     }
@@ -159,16 +163,29 @@ export default class Game{
 
             if (this.turno === 0){
                 for (let i = 0; i < 2; i++){
-                    this.deck.mostrarCartasP1()
+                    this.deck.mostrarCartasP2()
                 }
             }else if (this.turno === 1){
                 for (let i = 0; i < 2; i++){
                     this.deck.mostrarCartasP1()
                 }
             }
+        }
+    }
 
+    verificarMasCuatro(cartaDrag){
+        this.colorChange.style.visibility = "visible";
+        if(cartaDrag.tipo === "Especial_MasCuatro"){
+            if (this.turno === 0){
+                for (let i = 0; i < 4; i++){
+                    this.deck.mostrarCartasP2()
 
-
+                }
+            }else if (this.turno === 1){
+                for (let i = 0; i < 4; i++){
+                    this.deck.mostrarCartasP1()
+                }
+            }
         }
     }
     botonColor(cartaDrag){
